@@ -1,9 +1,10 @@
-let operand1 = 0;
-let operand2 = 0;
+let operand1 = "";
+let operand2 = "";
 let opop = '';
 let firstChosen = false;
 let secondChosen = false;
 
+const equalsTo = document.querySelector("#isEqualsTo");
 const ac = document.querySelector("#clear");
 const display = document.querySelector(".display");
 const operat = document.querySelectorAll(".operators");
@@ -24,7 +25,7 @@ const operate = (operation,a,b)=>{
     if(operation==="+")x= Number(a)+Number(b);
     else if(operation==="-")x= a-b;
     else if(operation==="*")x= a*b;
-    else if(operation==="/")x= a/b;
+    else if(operation==="/")x= Math.round((a/b)*1000)/1000;
     resetMem();
     return x;
 }
@@ -34,32 +35,32 @@ const operate = (operation,a,b)=>{
 
 operat.forEach(key=>key.addEventListener("click",(op)=>{
     opop = op.target.innerText;
-    refreshDisplay(" "+opop+" ");
+    firstChosen = true;
+    refreshDisplay(" "+opop);
 }));
 
 
 digits.forEach(key=>key.addEventListener("click",(digit)=>{
     if(firstChosen){
-        operand2 = digit.target.innerText;
+        operand2 += digit.target.innerText;
         secondChosen = true;
-        refreshDisplay(operand2);
+        refreshDisplay(digit.target.innerText);
     }else{
-        operand1 = digit.target.innerText;
-        firstChosen = true;
-        refreshDisplay(operand1);
+        operand1 += (digit.target.innerText);
+        refreshDisplay(digit.target.innerText);
     }
-    if(firstChosen && secondChosen && opop){
-        // console.log(operate(opop,operand1,operand2));
-        refreshDisplay((" = "+operate(opop,operand1,operand2)));
-    }
+    
 }));
 
-ac.addEventListener("click",(trivial)=>refreshDisplay(trivial,true));
 
+ac.addEventListener("click",(trivial)=>{cleanDisplay()});
+equalsTo.addEventListener("click",(e)=>{if(firstChosen && secondChosen && opop){
+    refreshDisplay(" = "+operate(opop,operand1,operand2));
+}})
 function refreshDisplay(touch,clearDisplay=false){
     display.innerText += touch;
-    if(clearDisplay)display.innerText = "";
 }
-
-
+function cleanDisplay(){
+    display.innerText = "";
+}
 
