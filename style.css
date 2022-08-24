@@ -11,7 +11,8 @@ body{
 }
 .display{
     height: 150px;
-    border: solid rgb(134, 250, 2) 2px;
+    /* border: solid rgb(134, 250, 2) 2px; */
+    background-color: rgb(6, 112, 6);
     margin: 10px;
     display:flex;
     justify-content: center;
