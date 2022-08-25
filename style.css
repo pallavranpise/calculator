@@ -1,58 +1,63 @@
-body{
-    padding: 50px;
-    flex: 1;
-    font-family: monospace;
-    font-weight:bold;
-    font-size: xx-large ;
+body, .display, .container, .controls, .controls div{
     display: flex;
-    align-items: center ;
-    justify-content: center;
-    background-color:  rgb(61, 60, 60);
-}
-.display{
-    height: 150px;
-    /* border: solid rgb(134, 250, 2) 2px; */
-    background-color: rgb(6, 112, 6);
-    margin: 10px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    /* border-bottom: 0px; */
 }
 
-.container{
-    background-color: #639ff8;
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    border: solid rgb(53, 53, 53) 10px;
-    padding: 5px;
+body {
+  padding: 100px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: xx-large;
+  background-color: rgb(184, 181, 181);
+  align-items: center;
+  justify-content: center;
+}
+.display {
+  font-size: xxx-large;
+  border: solid rgb(17, 27, 4) 4px;
+  height: 110px;
+  background-color: rgb(74, 153, 74);
+  box-sizing: border-box;
+  padding-right:3px ;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.container {
+  background-color: #639ff8;
+  flex-direction: column;
+  width: 40%;
+  max-width: 350px;
+  min-width: 300px;
+  border: solid rgb(17, 27, 4) 4px;
+  padding: 25px;
+  border-radius:20px;
 }
 
 .controls {
-    padding: 3px;
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center ;
-    justify-content: center;
-    /* border: solid yellowgreen 2px; */
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
-#ac, #clear{
-    width: 46%;
+#ac,
+#clear {
+  width: 37.5%;
+  background-color: rgb(159, 159, 233);
+}
+#zero {
+  width: 50%;
 }
 
-.controls div{
-    background-color: #abbece;
-    box-sizing: border-box;
-    width:30%;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3px;
-    margin: 1px;
+.controls div {
+  background-color: #abbece;
+  box-sizing: border-box;
+  width: 25%;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  border: solid #639ff8 2px;
+}
 
-    /* border: solid rgb(115, 145, 57) 1px; */
-}  
+div.operators{
+    background-color:rgb(201, 190, 160);
+}
+
