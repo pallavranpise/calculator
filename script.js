@@ -4,6 +4,7 @@ let opop = "";
 let gotten = "";
 let firstChosen = false;
 let secondChosen = false;
+let once = true;
 
 const equalsTo = document.querySelector("#isEqualsTo");
 const ac = document.querySelector("#clear");
@@ -24,63 +25,72 @@ function resetMem(){
 }
 
 const operate = (operation,a,b)=>{
-    console.log(opop,operand1,operand2,gotten,"operate");
     let x;
     if(operation==="+")x= Number(a)+Number(b);
     else if(operation==="-")x= a-b;
     else if(operation==="*")x= a*b;
     else if(operation==="/")x= Math.round((a/b)*10000)/10000;
-    // resetMem();
+    gotten = x;
     return x;
 }
 
 operat.forEach(key=>key.addEventListener("click",(op)=>{
-    console.log(opop,operand1,operand2,gotten,"oper click");
-    opop = op.target.innerText;
-    firstChosen = true;
     if(firstChosen && secondChosen && opop){
         cleanDisplay();
         gotten = operate(opop,operand1,operand2);
         appendDisply(gotten);
+        operand1 = gotten;
+        firstChosen = true;
+        operand2 = "";
+        secondChosen = false;
+        opop = "";
     }
+    opop = op.target.innerText;
+
+    firstChosen = true;
+    secondChosen = false;
+    operand2 = "";
+    
 }));
 
 
 digits.forEach(key=>key.addEventListener("click",(digit)=>{
-
-    if(gotten){
-        operand1 = gotten;
-        operand2 += digit.target.innerText;
-        secondChosen = true;
-        appendDisply(digit.target.innerText);
-        console.log(opop,operand1,operand2,gotten," click 1");
-    }else if(firstChosen){
-        
-        if(firstChosen && !secondChosen)cleanDisplay();
-        operand2 += digit.target.innerText;
-        secondChosen = true;
-        appendDisply(digit.target.innerText);
-        console.log(opop,operand1,operand2,gotten," click 2");
-    } else{
-        
-        operand1 += (digit.target.innerText);
-        appendDisply(digit.target.innerText);
-        console.log(opop,operand1,operand2,gotten," click 3");
-    }
+    takeNum(digit);
 }));
+
+function takeNum(n){
+    if(!firstChosen){
+        operand1 += (n.target.innerText);
+        appendDisply(n.target.innerText);
+    }else if(firstChosen){
+        if(firstChosen && !secondChosen)cleanDisplay();
+        operand2 += n.target.innerText;
+        secondChosen = true;
+        appendDisply(n.target.innerText);
+    }
+}
 
 
     ac.addEventListener("click",()=>{
-        resetMem();cleanDisplay();
-        console.log(opop,operand1,operand2,gotten," click ac");});
+        resetMem();
+        cleanDisplay();
+    });
 
 equalsTo.addEventListener("click",(e)=>{if(firstChosen && secondChosen && opop){
-    cleanDisplay();
-    gotten = operate(opop,operand1,operand2);
-    appendDisply(gotten);
-    console.log(opop,operand1,operand2,gotten," click =");
+    if(firstChosen && secondChosen && opop){
+        cleanDisplay();
+        gotten = operate(opop,operand1,operand2);
+        appendDisply(gotten);
+        operand1 = gotten;
+        firstChosen = true;
+        operand2 = "";
+        secondChosen = false;
+        opop = "";
+    }
     
 }})
+
+
 
 function appendDisply(touch){
     display.innerText += touch;
