@@ -38,8 +38,8 @@ body {
   flex-wrap: wrap;
 }
 
-#ac,
-#clear {
+#backspace,
+#allclear {
   width: 37.5%;
   background-color: rgb(159, 159, 233);
 }

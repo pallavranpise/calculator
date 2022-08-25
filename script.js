@@ -7,10 +7,11 @@ let secondChosen = false;
 let once = true;
 
 const equalsTo = document.querySelector("#isEqualsTo");
-const ac = document.querySelector("#clear");
+const ac = document.querySelector("#allclear");
 const display = document.querySelector(".display");
 const operat = document.querySelectorAll(".operators");
 const digits = document.querySelectorAll(".digits");
+const backspace = document.querySelector("#backspace");
 
 function resetMem() {
   operand1 = "";
@@ -73,6 +74,22 @@ function takeNum(n) {
 ac.addEventListener("click", () => {
   resetMem();
   cleanDisplay();
+});
+
+backspace.addEventListener("click",()=>{
+    if(!firstChosen){
+        operand1 = String(operand1).slice(0,-1);
+        cleanDisplay();
+        appendDisply(operand1);
+    }else if(firstChosen && !secondChosen){
+        operand1 = String(operand1).slice(0,-1);
+        cleanDisplay();
+        appendDisply(operand1);
+    }else if(firstChosen && secondChosen){
+        operand2 = String(operand2).slice(0,-1);
+        cleanDisplay();
+        appendDisply(operand2);
+    }
 });
 
 equalsTo.addEventListener("click", () => {
